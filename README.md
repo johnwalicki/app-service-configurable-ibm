@@ -20,12 +20,12 @@ If you have an Edge device generating MQTT data, you might want to send the IoT 
 
 EdgeX provides an [App-Service-Configurable](https://github.com/edgexfoundry/app-service-configurable/README.md) service as an easy way to get started with processing data flowing through EdgeX. This service leverages the App Functions SDK and provides a way for developers to use configuration instead of having to compile standalone services to utilize built in functions in the SDK. For a full list of supported/built-in functions view the README located in the App Functions SDK repository.
 
-** Watson IoT Configuration Example:**
+### Watson IoT Configuration Example:
 
 * Create a [Watson IoT Service instance](https://cloud.ibm.com/catalog/services/internet-of-things-platform)
 * Create a Devicetype, Device ID and a secure Authentication token.
 * Download this [configuration.toml](/res/ibm-mqtt-export/configuration.toml) and edit the **[Writable.Pipeline.Functions.MQTTSend.Addressable]** section.
-* Enter your Watson IoT Organization (6 character <orgid>), <DeviceType>, <Device ID> and <Authentication token>.
+* Enter your Watson IoT Organization (6 character \<orgid>), \<DeviceType\>, \<Device ID\> and \<Authentication token\>.
 
 ```
 [Writable.Pipeline.Functions.MQTTSend.Addressable]
