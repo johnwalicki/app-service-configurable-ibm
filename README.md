@@ -66,7 +66,7 @@ You'll need to make a couple changes to the docker-compose.yaml file:
 app-service-configurable:
   ...
   volumes:
-    - myconfigdirectory:/res/ibm-mqtt-export
+    - ./res/ibm-mqtt-export/:/res/ibm-mqtt-export/
   ...
 ```
 2. Edit the `docker-compose.yaml` in the `app-service-configurable:` section and change the `command:` line to incorporate the IBM MQTT profile. This needs to match the name of the folder that you've mounted into the `/res` directory above.
@@ -83,7 +83,7 @@ app-service-configurable:
     image: nexus3.edgexfoundry.org:10004/docker-app-service-configurable:latest
     command: --profile=ibm-mqtt-export
     volumes:
-      - myconfigdirectory:/res/ibm-mqtt-export
+      - ./res/ibm-mqtt-export/:/res/ibm-mqtt-export/
     ports:
       - "48095:48095"
     container_name: edgex-app-service-configurable
