@@ -16,9 +16,9 @@ You can build the EdgeX Foundry services using the open source code on [Github](
 
 ## Send MQTT Data to IBM Watson IoT platform
 
-If you have an Edge device generating MQTT data, you might want to send the IoT data to the Cloud for Analytics, storage, Real Time alerts and modeling. IBM Cloud provides an IoT ingestion service, Watson AI services, Watson Studio data science portal that can help developers manage their IoT data and find insights.
+If you have an Edge device generating MQTT data, you might want to send the IoT data to the cloud for real-time alerts, time series database storage, analytics and modeling. IBM Cloud provides an IoT ingestion service, Watson AI services, Cloud Object Storage and  Watson Studio data science portal that can help developers manage their IoT data and find insights.
 
-EdgeX provides an [App-Service-Configurable](https://github.com/edgexfoundry/app-service-configurable/README.md) service as an easy way to get started with processing data flowing through EdgeX. This service leverages the App Functions SDK and provides a way for developers to use configuration instead of having to compile standalone services to utilize built in functions in the SDK. For a full list of supported/built-in functions view the README located in the App Functions SDK repository.
+EdgeX provides an [App-Service-Configurable](https://github.com/edgexfoundry/app-service-configurable/blob/master/README.md) service as an easy way to get started with processing data flowing through EdgeX. This service leverages the App Functions SDK and provides a way for developers to use configuration instead of having to compile standalone services to utilize built in functions in the SDK. For a full list of supported/built-in functions view the README located in the App Functions SDK repository.
 
 ### Watson IoT Configuration Example:
 
@@ -39,4 +39,17 @@ EdgeX provides an [App-Service-Configurable](https://github.com/edgexfoundry/app
 ```  
 
 * Save this file
+* Edit the ```docker-compose.yaml``` file
+* Find the ```app-service-configurable:``` section and change the ```command:``` line to incorporate the IBM MQTT profile.
+
+```
+app-service-configurable:
+  ...
+  command: --profile=IBM
+  ...
+```
+
 * Restart docker-compose
+```
+docker-compose restart
+```
