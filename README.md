@@ -38,18 +38,44 @@ EdgeX provides an [App-Service-Configurable](https://github.com/edgexfoundry/app
   Topic=     "iot-2/evt/status/fmt/json"
 ```  
 
-* Save this file
-* Edit the ```docker-compose.yaml``` file
-* Find the ```app-service-configurable:``` section and change the ```command:``` line to incorporate the IBM MQTT profile.
+* After you have made the appropriate modifications for your account settings, save this file. Make sure the file is saved somewhere that can be easily volume mounted into your container. 
+* Below is a snippet of how to configure the app-service-configurable service in an [edgex docker-compose file](https://github.com/edgexfoundry/developer-scripts/tree/master/releases): 
+```yaml
+app-service-configurable:
+    image: nexus3.edgexfoundry.org:10004/docker-app-service-configurable:latest
+    command: --profile=docker
+    ports:
+      - "48095:48095"
+    container_name: edgex-app-service-configurable
+    hostname: edgex-app-service-configurable
+    networks:
+      edgex-network:
+        aliases:
+          - edgex-app-service-configurable
+    depends_on:
+      - data
+      - command
+  ```
 
-```
+You'll need to make a couple changes to the compose file:
+1) Mount the directory that has the `configuration.toml` file that you've modified above into the `/res` directory:
+```yaml
 app-service-configurable:
   ...
-  command: --profile=IBM
+  volumes:
+    - myconfigdirectory:/res/IBMProfile
+  ...
+```
+2) Edit the `docker-compose.yaml` in the `app-service-configurable:` section and change the `command:` line to incorporate the IBM MQTT profile. This needs to match the name of the folder that you've mounted into the `/res` directory above.
+
+```yaml
+app-service-configurable:
+  ...
+  command: --profile=IBMProfile
   ...
 ```
 
-* Restart docker-compose
+* Restart app-service-configurable:
 ```
-docker-compose restart
+docker-compose restart app-service-configurable
 ```
